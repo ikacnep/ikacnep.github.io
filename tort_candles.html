@@ -1,0 +1,78 @@
+<html>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<div id="area"></div>
+<script>
+	function dist(x1, y1, x2, y2) {
+		return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+	}
+
+	$(function($) {
+		const area = $('#area');
+		const em = area.width() / 36;
+		console.log('1 em is', em);
+		area.click((e) => {
+			const [x, y] = [e.clientX - 8, e.clientY - 8];
+			console.log(x, y);
+
+			if (dist(x, y, 18*em, 18*em) > 18*em*18*em) {
+				return;
+			}
+
+			const candle = $('<div class="candle"/>').css({top: y, left: x}).data({top: y, left: x});
+			let bad = false;
+
+			for (let c of area.find('.candle:not(.bad)')) {
+				const [x1, y1] = [$(c).data('left'), $(c).data('top')];
+				const d = dist(x, y, x1, y1);
+				console.log('other candle at', x1, y1, 'with distance', d);
+				if (d < 100 * em * em) {
+					bad = true;
+					break;
+				}
+			}
+
+			area.append(candle);
+			if (bad) {
+				candle.addClass('bad');
+				window.setTimeout(() => candle.remove(), 1000);
+			} else {
+				area.append($('<div class="shadow"/>').css({top: y - 10 * em, left: x - 10 * em}))
+			}
+		});
+	});
+</script>
+
+<style>
+	#area {
+		width: 36em;
+		height: 36em;
+		background-color: #EEE;
+		border-radius: 36em;
+		position: relative;
+	}
+
+	.candle {
+		width: 8px;
+		height: 8px;
+		background-color: lime;
+		border-radius: 4px;
+		position: absolute;
+		z-index: 2;
+	}
+
+	.shadow {
+		width: 20em;
+		height: 20em;
+		background-color: lightblue;
+		opacity: 0.2;
+		border-color: white;
+		border-radius: 10em;
+		position: absolute;
+		z-index: 1;
+	}
+
+	.bad {
+		background-color: red;
+	}
+</style>
