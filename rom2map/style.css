@@ -2,6 +2,13 @@
     --tile-size: 4;
 }
 
+#definition {
+    height: 20px;
+    line-height: 8px;
+    font-size: 8px;
+    margin-bottom: -4px;
+}
+
 tile {
     display: inline-block;
     width: var(--tile-size);

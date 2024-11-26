@@ -56,7 +56,7 @@ jQuery(function($) {
             error: () => {
                 alert('Failed to process the file :(');
             },
-            success: LoadMap,
+            success: LoadNewMap,
         });
 
         return false;
@@ -113,8 +113,6 @@ jQuery(function($) {
         const map = JSON.parse($('#definition').val());
         $('#definition').val('');
 
-        delete map.heights; // We don't render heights.
-
         // We don't need the never-rendered border of 8 tiles in all directions.
         const tiles = [];
         let i = 0;
@@ -141,7 +139,7 @@ jQuery(function($) {
     }
 
     function LoadMap(map) {
-        $('#map_name').text(map.info.map_name);
+        $('#map_name').text(`${map.info.map_name} --- ${map.info.width}x${map.info.height}`);
 
         const height = map.info.height;
         const width = map.info.width;
@@ -318,7 +316,7 @@ jQuery(function($) {
                         item_str += ' of ' + Spell(effect.spell_type_id, effect.spell_power);
                     }
 
-                    if (effect.modifiers) {
+                    if (effect.modifiers.length) {
                         const keys_in_order = [];
                         const moddict = {};
                         for (let modifier of effect.modifiers) {
@@ -333,7 +331,9 @@ jQuery(function($) {
                         for (let k of keys_in_order) {
                             modstr += ` ${engine_data.item_modifiers[k]}=${moddict[k]}`;
                         }
-                        item_str += ` with${modstr}`;
+                        if (modstr) {
+                            item_str += ` with${modstr}`;
+                        }
                     }
                 }
                 items[item.wielded][item_str] = (items[item.wielded][item_str] || 0) + 1;
