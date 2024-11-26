@@ -47,6 +47,8 @@ jQuery(function($) {
         var formData = new FormData();
         formData.append('file', $('#input_alm')[0].files[0]);
 
+        $('#loading').html('<span class="aui-icon aui-icon-small aui-iconfont-upload" role="img"/>');
+
         $.ajax({
             url: 'https://zxf63t213b.execute-api.eu-north-1.amazonaws.com/default/rom2-alm-parser?mode=alm_to_json',
             type: 'POST',
@@ -55,8 +57,12 @@ jQuery(function($) {
             contentType: false,  // tell jQuery not to set contentType
             error: () => {
                 alert('Failed to process the file :(');
+                $('#loading').html('<span class="aui-icon aui-icon-small aui-iconfont-error" role="img"/>');
             },
-            success: LoadNewMap,
+            success: (data) => {
+                LoadNewMap(data);
+                $('#loading').html('<span class="aui-icon aui-icon-small aui-iconfont-check-circle-filled" role="img"/>');
+            },
         });
 
         return false;
