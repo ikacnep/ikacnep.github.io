@@ -43,7 +43,7 @@ jQuery(function($) {
         $('#tile_size').val(localStorage.tile_size).change();
     }
     
-    $('#input_submit').click(() => {
+    $('#input_alm').change(() => {
         var formData = new FormData();
         formData.append('file', $('#input_alm')[0].files[0]);
 
