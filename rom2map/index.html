@@ -1,0 +1,102 @@
+<html>
+<head>
+    <link href="style.css" rel="stylesheet" />
+
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="engine_data.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aui/9.12.6/aui/aui-prototyping.min.js" integrity="sha512-VC+TLKdxDA1s08r6IsanEW10MdpJfkA7ulwE0k7Y2Nlw7za3bE/NEtSFUyFruNiC0qxNgCUHTIGuFtRCxnytvw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aui/9.12.6/aui/aui-prototyping.min.css" integrity="sha512-mVgNyyj30BolyU0U9pCnagZxxGIapwjDaNq8MFKdtwaYTsyvzDpIDBrFXoxeBxmVkSaHlBZWkGouoCnsB5/y0A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<textarea id="definition" style="height: 20px"></textarea>
+<button id="load_map">load</button>
+&nbsp; &nbsp; tile size: <input id="tile_size" type="number" min="1" max="40" value="4">
+
+&nbsp; &nbsp;
+<form action="https://zxf63t213b.execute-api.eu-north-1.amazonaws.com/default/rom2-alm-parser?mode=alm_to_json" method="post" class="form-input">
+    <input type="file" id="input_alm">
+    <button id="input_submit">submit</button>
+</form>
+
+<hr>
+
+<h3 id="map_name">(no map loaded)</h3>
+
+<table>
+    <tr>
+        <td>
+            <div id="overlay"></div>
+            <div id="minimap"></div>
+        </td>
+        <td>
+            <ol id="description"></ol>
+        </td>
+    </tr>
+</table>
+
+<hr>
+
+<div class="aui-tabs horizontal-tabs" id="things">
+    <ul class="tabs-menu">
+        <li class="menu-item active-tab">
+            <a href="#things_pane_units">Units</a>
+        </li>
+        <li class="menu-item">
+            <a href="#things_pane_groups">Groups</a>
+        </li>
+        <li class="menu-item">
+            <a href="#things_pane_buildings">Buildings</a>
+        </li>
+        <li class="menu-item">
+            <a href="#things_pane_logic">Logic</a>
+        </li>
+        <li class="menu-item">
+            <a href="#things_pane_effects">Effects</a>
+        </li>
+    </ul>
+    <div class="tabs-pane active-pane" id="things_pane_units">
+        <button class="filter aui-button" data-filter=".drop">Drops</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".wield">Wields</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".referenced_unit">Ref-d units</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".referenced_group">Ref-d groups</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".thing">All</button>
+
+        <ul id="things_units"></ul>
+    </div>
+    <div class="tabs-pane" id="things_pane_groups">
+        <button class="filter aui-button aui-button-subtle" data-filter=".referenced_group">Ref-d groups</button>
+        <button class="filter aui-button" data-filter=".thing">All</button>
+
+        <ul id="things_groups"></ul>
+    </div>
+    <div class="tabs-pane" id="things_pane_buildings">
+        <button class="filter aui-button" data-filter=".referenced_building">Referenced</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".thing">All</button>
+        <ul id="things_buildings"></ul>
+    </div>
+    <div class="tabs-pane" id="things_pane_logic">
+        <button class="filter aui-button" data-filter=".thing">All</button>
+
+        <ul id="things_logic"></ul>
+    </div>
+    <div class="tabs-pane" id="things_pane_effects">
+        <button class="filter aui-button" data-filter=".thing">All</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".from-building">Building effects</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".trap">Traps</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".from-ally-building">From ally building</button>
+        <button class="filter aui-button aui-button-subtle" data-filter=".teleport">Teleports</button>
+
+        <ul id="things_effects"></ul>
+    </div>
+</div>
+
+<div id="things_footer"></div>
+
+</body>
+</html>

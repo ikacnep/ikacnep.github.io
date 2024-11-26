@@ -1,0 +1,39 @@
+:root {
+    --tile-size: 4;
+}
+
+tile {
+    display: inline-block;
+    width: var(--tile-size);
+    height: var(--tile-size);
+    background-image: url(tile-sprite.png);
+    background-position: 100% 100%;
+    background-size: 3000%;
+}
+
+.row {
+    white-space: nowrap;
+}
+
+#overlay {
+    position: relative;
+}
+
+.mark {
+    position: absolute;
+    color: pink;
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.container .item {
+    padding-left: 1em;
+}
+
+body {
+    margin: 8px !important;
+}
+
+.form-input {
+    display: inline-block;
+}
