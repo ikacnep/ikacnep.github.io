@@ -46,13 +46,19 @@ jQuery(function($) {
     $('#input_submit').click(() => {
         var formData = new FormData();
         formData.append('file', $('#input_alm')[0].files[0]);
+
         $.ajax({
-            url: 'https://7xwkqmtagb7movvv7pmoem4jk40lcpwl.lambda-url.eu-north-1.on.aws/alm_to_json',
+            url: 'https://zxf63t213b.execute-api.eu-north-1.amazonaws.com/default/rom2-alm-parser?mode=alm_to_json',
             type: 'POST',
             data: formData,
             processData: false,  // tell jQuery not to process the data
             contentType: false,  // tell jQuery not to set contentType
+            error: () => {
+                alert('Failed to process the file :(');
+            },
+            success: LoadMap,
         });
+
         return false;
     });
 
