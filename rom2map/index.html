@@ -14,15 +14,19 @@
 </head>
 <body>
 
-<textarea id="definition" style="height: 20px"></textarea>
-<button id="load_map">load</button>
-&nbsp; &nbsp; tile size: <input id="tile_size" type="number" min="1" max="40" value="4">
-
-&nbsp; &nbsp;
 <form action="https://zxf63t213b.execute-api.eu-north-1.amazonaws.com/default/rom2-alm-parser?mode=alm_to_json" method="post" class="form-input">
     <input type="file" id="input_alm">
     <button id="input_submit">submit</button>
 </form>
+
+&nbsp; | &nbsp;
+
+load JSON: <textarea id="definition" style="height: 20px"></textarea>
+<button id="load_map">load</button>
+
+&nbsp; | &nbsp;
+
+tile size: <input id="tile_size" type="number" min="1" max="40" value="4">
 
 <hr>
 
