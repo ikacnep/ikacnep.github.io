@@ -6,7 +6,7 @@ jQuery(function($) {
     const BUILDING = 9;
     const PLAYER = 3;
 
-    $('#load_map').click(LoadNewMap);
+    $('#load_map').click(() => LoadNewMap($('#definition').val()));
     $('#debug_tiles').click(DebugTiles);
     $('#tile_size').change(ChangeTileSize);
 
@@ -109,8 +109,8 @@ jQuery(function($) {
         });
     }
 
-    function LoadNewMap() {
-        const map = JSON.parse($('#definition').val());
+    function LoadNewMap(definition) {
+        const map = JSON.parse(definition);
         $('#definition').val('');
 
         // We don't need the never-rendered border of 8 tiles in all directions.
