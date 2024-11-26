@@ -257,7 +257,7 @@ jQuery(function($) {
         }
         
         let bag = [];
-        if (1 < unit.bag_id && unit.bag_id - 1 < map.bags.length) {
+        if (0 < unit.bag_id && unit.bag_id - 1 < map.bags.length) {
             bag = map.bags[unit.bag_id - 1].items;
 
             if (bag.length) {
